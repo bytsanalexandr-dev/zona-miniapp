@@ -437,7 +437,6 @@ body {
     <div class="scene-stage">
       <div class="scene-overlay"></div>
       <div class="floor-line"></div>
-      <img id="char-img" src="/static/images/char_tier1.jpg" alt="character">
       <img id="car-img" src="" alt="car" style="display:none;">
     </div>
     <div class="char-info">
@@ -677,8 +676,6 @@ function getRank() {
 function renderCharacter() {
   const s    = G;
   const tier = s.tier || 1;
-
-  document.getElementById('char-img').src = `/static/images/char_tier${tier}.jpg`;
 
   const carImg  = document.getElementById('car-img');
   const carMap  = { 2: 'car_tier2.jpg', 3: 'car_tier3.jpg', 4: 'car_tier4.jpg' };
