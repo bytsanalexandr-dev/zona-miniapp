@@ -156,6 +156,93 @@ ACTIONS = {
     'lay_low': {
         'name': 'Залечь на дно',          'category': 'Личное',     'tier': 2,
         'desc': 'Снизить жару, не делать ничего подозрительного.',   'cost': 0},
+    # ── TIER 1: Communications ────────────────────────────────────────────────
+    'send_malyava': {
+        'name': 'Передать маляву',        'category': 'Социальное', 'tier': 1,
+        'desc': '+15 репутации. Стоит 5 монет.',                     'cost': 5},
+    'organize_obshchak': {
+        'name': 'Организовать общак',     'category': 'Банда',      'tier': 1,
+        'desc': '+25 репутации. Нужно 3 члена банды.',               'cost': 0},
+    # ── TIER 2: Lifestyle ─────────────────────────────────────────────────────
+    'eat_cafe': {
+        'name': 'Поесть в кафе',          'category': 'Уход',       'tier': 2,
+        'desc': '+30 голод, +10 настроение. Стоит 25.',              'cost': 25},
+    'go_banya': {
+        'name': 'Сходить в баню',         'category': 'Уход',       'tier': 2,
+        'desc': '+40 гигиена, +20 настроение. Стоит 40.',            'cost': 40},
+    'buy_phone_new': {
+        'name': 'Купить новый телефон',   'category': 'Социальное', 'tier': 2,
+        'desc': '+20 репутация. Стоит 80.',                          'cost': 80},
+    'find_tochka': {
+        'name': 'Найти точку',            'category': 'Экономика',  'tier': 2,
+        'desc': '+50 пассивного дохода в день. Стоит 100.',          'cost': 100},
+    'hire_driver': {
+        'name': 'Нанять водителя',        'category': 'Банда',      'tier': 2,
+        'desc': 'Рекрутировать водителя в банду. Стоит 60.',         'cost': 60},
+    # ── TIER 3: Premium ───────────────────────────────────────────────────────
+    'restaurant': {
+        'name': 'Ресторан',               'category': 'Уход',       'tier': 3,
+        'desc': '+40 голод, +25 настроение. Стоит 150.',             'cost': 150},
+    'nightclub': {
+        'name': 'Ночной клуб',            'category': 'Социальное', 'tier': 3,
+        'desc': '+35 настроение, +15 реп. Стоит 200.',               'cost': 200},
+    'sauna_devochki': {
+        'name': 'Сауна с девочками',      'category': 'Уход',       'tier': 3,
+        'desc': '+50 настроение, +20 здоровье. Стоит 300.',          'cost': 300},
+    'personal_trainer': {
+        'name': 'Личный тренер',          'category': 'Физическое', 'tier': 3,
+        'desc': '+15 сила. Стоит 120.',                              'cost': 120},
+    'lawyer': {
+        'name': 'Адвокат',                'category': 'Личное',     'tier': 3,
+        'desc': '-20 жары. Стоит 500.',                              'cost': 500},
+    'bribe_cop': {
+        'name': 'Подкупить мента',        'category': 'Личное',     'tier': 3,
+        'desc': '-15 жары. Стоит 300.',                              'cost': 300},
+    # ── TIER 4: Elite ─────────────────────────────────────────────────────────
+    'business_dinner': {
+        'name': 'Деловой ужин',           'category': 'Социальное', 'tier': 4,
+        'desc': '+30 реп, +20 влияние. Стоит 1 000.',               'cost': 1000},
+    'private_doctor': {
+        'name': 'Частный доктор',         'category': 'Уход',       'tier': 4,
+        'desc': '+40 здоровье. Стоит 800.',                          'cost': 800},
+    'guard_24_7': {
+        'name': 'Охрана 24/7',            'category': 'Личное',     'tier': 4,
+        'desc': '-50% риск травм на 7 дней. Стоит 2 000.',          'cost': 2000},
+    'buy_deputy': {
+        'name': 'Купить депутата',        'category': 'Империя',    'tier': 4,
+        'desc': '-30 жары, +100 влияние. Стоит 10 000.',            'cost': 10000},
+    'yacht_weekend': {
+        'name': 'Яхта на выходные',       'category': 'Уход',       'tier': 4,
+        'desc': '+50 настроение, +30 реп. Стоит 5 000.',            'cost': 5000},
+    # ── TIER 5: Ultra ─────────────────────────────────────────────────────────
+    'private_jet': {
+        'name': 'Частный самолёт',        'category': 'Уход',       'tier': 5,
+        'desc': '+40 настроение, +50 реп. Стоит 20 000.',           'cost': 20000},
+    'personal_chef': {
+        'name': 'Личный повар',           'category': 'Уход',       'tier': 5,
+        'desc': '+50 голод, +30 настроение. Стоит 5 000.',          'cost': 5000},
+    'buy_minister': {
+        'name': 'Купить министра',        'category': 'Империя',    'tier': 5,
+        'desc': '+200 влияние, -50 жары. Стоит 50 000.',            'cost': 50000},
+    'spa_resort': {
+        'name': 'Спа-курорт',             'category': 'Уход',       'tier': 5,
+        'desc': '+60 здоровье, +40 настроение. Стоит 15 000.',      'cost': 15000},
+    'press_conference': {
+        'name': 'Пресс-конференция',      'category': 'Социальное', 'tier': 5,
+        'desc': '+100 влияние. Стоит 30 000.',                      'cost': 30000},
+    # ── TIER 6: World ─────────────────────────────────────────────────────────
+    'buy_island': {
+        'name': 'Купить остров',          'category': 'Империя',    'tier': 6,
+        'desc': '+500 влияние. Стоит 1 000 000.',                   'cost': 1000000},
+    'private_army_op': {
+        'name': 'Операция армии',         'category': 'Империя',    'tier': 6,
+        'desc': '+200 влияние. Стоит 100 000.',                     'cost': 100000},
+    'bribe_un': {
+        'name': 'Подкуп ООН',             'category': 'Империя',    'tier': 6,
+        'desc': '-100 жары. Стоит 500 000.',                        'cost': 500000},
+    'meet_president': {
+        'name': 'Встреча с президентом',  'category': 'Империя',    'tier': 6,
+        'desc': '+300 влияние. Стоит 200 000.',                     'cost': 200000},
 }
 
 
@@ -652,6 +739,291 @@ def do_action(state, action_id):
         state['mood'] = max(0, state.get('mood', 50) - 5)
         msgs.append('Залёг на дно. -Жара')
 
+    # ── NEW TIER 1 ────────────────────────────────────────────────────────────
+    elif action_id == 'send_malyava':
+        cost = 5
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost} монет.')
+            return msgs
+        state['cash'] -= cost
+        state['reputation'] = min(100, state.get('reputation', 10) + 15)
+        msgs.append('Малява дошла. +15 репутации')
+
+    elif action_id == 'organize_obshchak':
+        if len(state.get('gang_members', [])) < 3:
+            msgs.append('Нужно минимум 3 члена банды.')
+            return msgs
+        state['reputation'] = min(100, state.get('reputation', 10) + 25)
+        state['mood'] = min(100, state.get('mood', 50) + 10)
+        msgs.append('Общак поднят. +25 репутации')
+
+    # ── NEW TIER 2 ────────────────────────────────────────────────────────────
+    elif action_id == 'eat_cafe':
+        cost = 25
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost}.')
+            return msgs
+        state['cash'] -= cost
+        state['hunger'] = min(100, state.get('hunger', 50) + 30)
+        state['mood'] = min(100, state.get('mood', 50) + 10)
+        msgs.append('Поел в кафе. +Голод, +Настроение')
+
+    elif action_id == 'go_banya':
+        cost = 40
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost}.')
+            return msgs
+        state['cash'] -= cost
+        state['hygiene'] = min(100, state.get('hygiene', 50) + 40)
+        state['mood'] = min(100, state.get('mood', 50) + 20)
+        msgs.append('Попарился в бане. +Гигиена, +Настроение')
+
+    elif action_id == 'buy_phone_new':
+        cost = 80
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost}.')
+            return msgs
+        state['cash'] -= cost
+        state['reputation'] = min(100, state.get('reputation', 10) + 20)
+        msgs.append('Купил новый телефон. +Репутация')
+
+    elif action_id == 'find_tochka':
+        cost = 100
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost}.')
+            return msgs
+        state['cash'] -= cost
+        state['passive_income_bonus'] = state.get('passive_income_bonus', 0) + 50
+        msgs.append('Нашёл точку. +50 пассивного дохода в день')
+
+    elif action_id == 'hire_driver':
+        import uuid
+        from gang import MEMBER_TYPES, _NAMES, max_gang_size
+        cost = 60
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost}.')
+            return msgs
+        gang = state.setdefault('gang_members', [])
+        cap = max_gang_size(state)
+        if len(gang) >= cap:
+            msgs.append(f'Банда полна ({cap} чел.).')
+            return msgs
+        state['cash'] -= cost
+        mtype = MEMBER_TYPES['voditel']
+        used_names = {m['name'] for m in gang}
+        pool = [n for n in _NAMES if n not in used_names] or _NAMES
+        name = random.choice(pool)
+        lo_str, hi_str = mtype['str_range']
+        lo_loy, hi_loy = mtype['loyalty_range']
+        gang.append({
+            'id': f'gm_{uuid.uuid4().hex[:8]}',
+            'name': name, 'age': random.randint(18, 45),
+            'type': 'voditel', 'type_name': mtype['name_ru'],
+            'loyalty': random.randint(lo_loy, hi_loy),
+            'strength': random.randint(lo_str, hi_str),
+            'skill': random.randint(20, 80),
+            'specialty': mtype['specialty'],
+            'daily_cost': mtype['daily_cost'],
+            'daily_income': 0, 'days_with_you': 0,
+            'special': mtype.get('special'),
+        })
+        msgs.append(f'{name} (Водитель) нанят')
+
+    # ── NEW TIER 3 ────────────────────────────────────────────────────────────
+    elif action_id == 'restaurant':
+        cost = 150
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost}.')
+            return msgs
+        state['cash'] -= cost
+        state['hunger'] = min(100, state.get('hunger', 50) + 40)
+        state['mood'] = min(100, state.get('mood', 50) + 25)
+        msgs.append('Отужинал в ресторане. +Голод, +Настроение')
+
+    elif action_id == 'nightclub':
+        cost = 200
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost}.')
+            return msgs
+        state['cash'] -= cost
+        state['mood'] = min(100, state.get('mood', 50) + 35)
+        state['reputation'] = min(100, state.get('reputation', 10) + 15)
+        msgs.append('Ночной клуб. +Настроение, +Репутация')
+
+    elif action_id == 'sauna_devochki':
+        cost = 300
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost}.')
+            return msgs
+        state['cash'] -= cost
+        state['mood'] = min(100, state.get('mood', 50) + 50)
+        state['health'] = min(100, state.get('health', 80) + 20)
+        msgs.append('Сауна. +Настроение, +Здоровье')
+
+    elif action_id == 'personal_trainer':
+        cost = 120
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost}.')
+            return msgs
+        state['cash'] -= cost
+        state['strength'] = min(100, state.get('strength', 35) + 15)
+        msgs.append('Тренировка с личным тренером. +Сила')
+
+    elif action_id == 'lawyer':
+        cost = 500
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost}.')
+            return msgs
+        state['cash'] -= cost
+        state['heat'] = max(0, state.get('heat', 0) - 20)
+        msgs.append('Адвокат поработал. -20 жары')
+
+    elif action_id == 'bribe_cop':
+        cost = 300
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {cost}.')
+            return msgs
+        state['cash'] -= cost
+        state['heat'] = max(0, state.get('heat', 0) - 15)
+        msgs.append('Мент в кармане. -15 жары')
+
+    # ── NEW TIER 4 ────────────────────────────────────────────────────────────
+    elif action_id == 'business_dinner':
+        cost = 1000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['reputation'] = min(100, state.get('reputation', 10) + 30)
+        state['influence'] = state.get('influence', 0) + 20
+        msgs.append('Деловой ужин. +Репутация, +Влияние')
+
+    elif action_id == 'private_doctor':
+        cost = 800
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['health'] = min(100, state.get('health', 80) + 40)
+        msgs.append('Частный доктор. +40 здоровья')
+
+    elif action_id == 'guard_24_7':
+        cost = 2000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['guard_active_days'] = state.get('guard_active_days', 0) + 7
+        msgs.append('Охрана 24/7 на 7 дней. -50% риск травм')
+
+    elif action_id == 'buy_deputy':
+        cost = 10000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['heat'] = max(0, state.get('heat', 0) - 30)
+        state['influence'] = state.get('influence', 0) + 100
+        msgs.append('Депутат куплен. -30 жары, +100 влияния')
+
+    elif action_id == 'yacht_weekend':
+        cost = 5000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['mood'] = min(100, state.get('mood', 50) + 50)
+        state['reputation'] = min(100, state.get('reputation', 10) + 30)
+        msgs.append('Яхта на выходные. +Настроение, +Репутация')
+
+    # ── NEW TIER 5 ────────────────────────────────────────────────────────────
+    elif action_id == 'private_jet':
+        cost = 20000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['mood'] = min(100, state.get('mood', 50) + 40)
+        state['reputation'] = min(100, state.get('reputation', 10) + 50)
+        msgs.append('Частный самолёт. +Настроение, +Репутация')
+
+    elif action_id == 'personal_chef':
+        cost = 5000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['hunger'] = min(100, state.get('hunger', 50) + 50)
+        state['mood'] = min(100, state.get('mood', 50) + 30)
+        msgs.append('Личный повар накормил. +Голод, +Настроение')
+
+    elif action_id == 'buy_minister':
+        cost = 50000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['influence'] = state.get('influence', 0) + 200
+        state['heat'] = max(0, state.get('heat', 0) - 50)
+        msgs.append('Министр куплен. +200 влияния, -50 жары')
+
+    elif action_id == 'spa_resort':
+        cost = 15000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['health'] = min(100, state.get('health', 80) + 60)
+        state['mood'] = min(100, state.get('mood', 50) + 40)
+        msgs.append('Спа-курорт. +Здоровье, +Настроение')
+
+    elif action_id == 'press_conference':
+        cost = 30000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['influence'] = state.get('influence', 0) + 100
+        msgs.append('Пресс-конференция. +100 влияния')
+
+    # ── NEW TIER 6 ────────────────────────────────────────────────────────────
+    elif action_id == 'buy_island':
+        cost = 1000000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['influence'] = state.get('influence', 0) + 500
+        msgs.append('Остров куплен. +500 влияния')
+
+    elif action_id == 'private_army_op':
+        cost = 100000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['influence'] = state.get('influence', 0) + 200
+        state['reputation'] = min(100, state.get('reputation', 10) + 100)
+        msgs.append('Операция армии. +Влияние, +Репутация')
+
+    elif action_id == 'bribe_un':
+        cost = 500000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['heat'] = max(0, state.get('heat', 0) - 100)
+        msgs.append('ООН подкуплена. -100 жары')
+
+    elif action_id == 'meet_president':
+        cost = 200000
+        if state.get('cash', 0) < cost:
+            msgs.append(f'Нужно {fmt(cost)}.')
+            return msgs
+        state['cash'] -= cost
+        state['influence'] = state.get('influence', 0) + 300
+        msgs.append('Встреча с президентом. +300 влияния')
+
     else:
         return ['Неизвестное действие.']
 
@@ -736,6 +1108,7 @@ def advance_day(state):
     msgs.extend(gang_msgs)
 
     passive = daily_passive_income(state)
+    passive += state.get('passive_income_bonus', 0)
     if passive > 0:
         state['cash'] = state.get('cash', 0) + passive
         state['money_earned'] = state.get('money_earned', 0) + passive
@@ -775,6 +1148,9 @@ def advance_day(state):
     state['actions_left'] = 3
     state['actions_used'] = []
     state.pop('shaved_today', None)
+    if state.get('guard_active_days', 0) > 0:
+        state['guard_active_days'] -= 1
+        state['heat'] = max(0, state.get('heat', 0) - 2)
 
     # 14. ACHIEVEMENTS
     _check_achievements(state)

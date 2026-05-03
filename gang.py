@@ -174,7 +174,7 @@ MEMBER_TYPES = {
 }
 
 # Max gang size per tier
-_MAX_GANG = {1: 12, 2: 50, 3: 200, 4: 1000, 5: 10000, 6: 999999}
+_MAX_GANG = {1: 20, 2: 100, 3: 500, 4: 2000, 5: 10000, 6: 999999}
 
 
 def max_gang_size(state_or_rep):
