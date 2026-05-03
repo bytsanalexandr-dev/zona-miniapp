@@ -63,7 +63,7 @@ body {
 /* ── Scene section ── */
 .scene-section { border-bottom: 1px solid var(--border); }
 .scene-stage {
-  position: relative; height: 250px; overflow: hidden;
+  position: relative; height: 180px; overflow: hidden;
   display: flex; align-items: flex-end; justify-content: center;
   background-color: #08080f;
 }
@@ -81,48 +81,44 @@ body {
   width: 56px; height: 8px;
   background: radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%);
 }
-@keyframes idle-sway {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-4px); }
-}
 /* Car image */
 #car-img {
   position: absolute; bottom: 0; right: 0; z-index: 2;
-  width: 40%; max-height: 130px;
+  width: 40%; max-height: 90px;
   object-fit: contain; object-position: bottom right;
   filter: drop-shadow(-4px 4px 10px rgba(0,0,0,0.65));
   transition: opacity 0.5s;
 }
 /* Character image */
 #char-img {
-  height: 165px; width: auto; display: block; object-fit: contain;
-  animation: idle-sway 3.5s ease-in-out infinite;
-  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.85));
+  height: 120px; width: auto; display: block; object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.7));
   transition: opacity 0.4s;
 }
 
-.char-info { background: #0d0d1a; padding: 10px 14px; }
-.char-name { font-size: 14px; font-weight: bold; color: var(--text); margin-bottom: 4px; }
+.char-info { background: #0d0d1a; padding: 5px 14px 6px; }
+.char-name { font-size: 13px; font-weight: bold; color: var(--text); }
 .char-tier {
-  font-size: 11px; color: var(--accent);
+  font-size: 10px; color: var(--accent);
   background: rgba(233,69,96,0.1); border: 1px solid rgba(233,69,96,0.3);
-  display: inline-block; border-radius: 8px; padding: 1px 7px; margin-bottom: 8px;
+  display: inline-block; border-radius: 8px; padding: 1px 6px;
 }
-.cash-display { font-size: 16px; font-weight: bold; color: var(--gold); margin-bottom: 4px; }
+.cash-display { font-size: 14px; font-weight: bold; color: var(--gold); }
 .actions-left { font-size: 11px; color: var(--accent); }
-.surv-label { font-size: 10px; color: var(--muted); margin-top: 8px; margin-bottom: 2px; }
+.surv-label { font-size: 10px; color: var(--muted); margin-top: 4px; margin-bottom: 1px; }
 .surv-bar-wrap {
-  height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
+  height: 5px; background: var(--border); border-radius: 3px; overflow: hidden;
 }
 .surv-bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
 
 /* ── Stats ── */
-.stats-section { background: #0d0d1a; padding: 10px 14px; border-bottom: 1px solid var(--border); }
-.stat-row { display: flex; align-items: center; margin-bottom: 5px; gap: 6px; }
-.stat-name { font-size: 10px; color: var(--muted); width: 68px; flex-shrink: 0; text-align: right; }
-.stat-bar-wrap { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; cursor: pointer; }
-.stat-bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s; }
-.stat-val { font-size: 10px; width: 26px; text-align: right; flex-shrink: 0; }
+.stats-section { background: #0d0d1a; padding: 5px 14px 6px; border-bottom: 1px solid var(--border); }
+.stat-row { display: flex; align-items: center; margin-bottom: 3px; gap: 5px; }
+.stat-name { font-size: 9px; color: var(--muted); width: 60px; flex-shrink: 0; text-align: right; }
+.stat-bar-wrap { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; cursor: pointer; }
+.stat-bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
+.stat-val { font-size: 9px; width: 22px; text-align: right; flex-shrink: 0; }
 
 /* ── Tabs ── */
 .tab-bar {
@@ -133,10 +129,10 @@ body {
 }
 .tab-bar::-webkit-scrollbar { display: none; }
 .tab-btn {
-  padding: 10px 14px; font-family: inherit; font-size: 11px; font-weight: bold;
+  padding: 7px 12px; font-family: inherit; font-size: 11px; font-weight: bold;
   color: var(--muted); background: transparent; border: none; cursor: pointer;
   border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.2s;
-  min-height: 44px;
+  min-height: 36px;
 }
 .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 .tab-content { display: none; padding: 12px; }
