@@ -42,7 +42,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+_BASE = os.path.dirname(os.path.abspath(__file__))
+app.mount("/static", StaticFiles(directory=os.path.join(_BASE, "static")), name="static")
 
 
 # ── Request models ────────────────────────────────────────────────────────────
@@ -93,7 +94,7 @@ def health():
 
 @app.get("/")
 def root():
-    return FileResponse("static/index.html")
+    return FileResponse(os.path.join(_BASE, "static", "index.html"))
 
 
 @app.post("/api/new_game")
