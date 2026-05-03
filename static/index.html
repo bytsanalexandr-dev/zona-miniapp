@@ -36,14 +36,6 @@ body {
   --danger:   #c0392b;
 }
 
-/* ── Scene background layers (crossfade, contained in scene-stage) ── */
-.scene-bg-layer {
-  position: absolute; inset: 0;
-  background-size: cover; background-position: center center;
-  opacity: 0; transition: opacity 0.9s ease-in-out;
-  pointer-events: none;
-}
-
 /* ── Header ── */
 .header {
   position: sticky; top: 0; z-index: 100;
@@ -63,9 +55,9 @@ body {
 /* ── Scene section ── */
 .scene-section { border-bottom: 1px solid var(--border); }
 .scene-stage {
-  position: relative; height: 220px; overflow: hidden;
-  display: flex; align-items: flex-end; justify-content: center;
-  background-color: #1a1a2e;
+  position: relative; width: 100%; height: 220px; overflow: hidden;
+  background-image: url('/static/images/bg_tier1.jpg');
+  background-size: cover; background-position: center;
 }
 .scene-overlay {
   position: absolute; inset: 0; pointer-events: none;
@@ -92,14 +84,13 @@ body {
   filter: drop-shadow(-4px 4px 10px rgba(0,0,0,0.65));
   transition: opacity 0.5s;
 }
-/* Character image – portrait/bust: shows top 40% of full-body image */
 #char-img {
-  width: 100%; height: 220px; display: block;
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  height: 110%; width: auto;
   object-fit: cover; object-position: top center;
-  background: #1a1a2e; /* solid fallback for transparent PNG areas */
   filter: drop-shadow(0 0 20px rgba(0,0,0,0.8));
   transition: opacity 0.4s;
-  position: relative; z-index: 2;
+  z-index: 2;
 }
 
 .char-info { background: #0d0d1a; padding: 5px 14px 6px; }
@@ -444,8 +435,6 @@ body {
   <!-- Scene -->
   <div class="scene-section">
     <div class="scene-stage">
-      <div id="scene-bg-a" class="scene-bg-layer"></div>
-      <div id="scene-bg-b" class="scene-bg-layer"></div>
       <div class="scene-overlay"></div>
       <div class="floor-line"></div>
       <div class="char-scene-wrap">
@@ -522,7 +511,6 @@ let G = null;          // full game state
 let USER_ID = null;    // telegram user id
 let ACTIVE_TAB = 'actions';
 let API_BASE = '';     // same origin
-let _bgLayer = 'a';   // which layer is currently visible
 let _bgTier  = 0;     // tier currently shown (0 = none)
 
 const TIER_NAMES = {1:'ЗОНА',2:'РАЙОН',3:'ГОРОД',4:'ОБЛАСТЬ',5:'СТРАНА',6:'МИР'};
@@ -621,19 +609,11 @@ document.getElementById('name-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') createGame();
 });
 
-// ── Background crossfade ──────────────────────────────────────────────────────
+// ── Background update ─────────────────────────────────────────────────────────
 function updateBackground(tier) {
   if (tier === _bgTier) return;
   _bgTier = tier;
-  const url  = `/static/images/bg_tier${tier}.jpg`;
-  const next = _bgLayer === 'a' ? 'b' : 'a';
-  const prev = _bgLayer;
-  const elNext = document.getElementById('scene-bg-' + next);
-  const elPrev = document.getElementById('scene-bg-' + prev);
-  elNext.style.backgroundImage = `url('${url}')`;
-  elNext.style.opacity = '1';
-  elPrev.style.opacity = '0';
-  _bgLayer = next;
+  document.querySelector('.scene-stage').style.backgroundImage = `url('/static/images/bg_tier${tier}.jpg')`;
 }
 
 // ── Render all ────────────────────────────────────────────────────────────────
