@@ -78,6 +78,14 @@ def init_db():
                 saved_at       TEXT
             )
         ''')
+        cur.execute('''
+            CREATE TABLE IF NOT EXISTS globe_territories (
+                territory_id  TEXT PRIMARY KEY,
+                owner_user_id BIGINT,
+                owner_name    TEXT,
+                captured_at   TEXT
+            )
+        ''')
     print("[DB] Tables ready (PostgreSQL/Supabase)")
 
 
@@ -189,6 +197,39 @@ def update_leaderboard(user_id: int, player_name: str, score: float,
              days_played, num_businesses, gang_size, territories,
              datetime.now().strftime('%d.%m.%Y %H:%M'))
         )
+
+
+def get_globe_territories() -> list:
+    with _cursor() as cur:
+        cur.execute('SELECT territory_id, owner_user_id, owner_name FROM globe_territories')
+        return cur.fetchall()
+
+
+def capture_globe_territory(territory_id: str, user_id: int, owner_name: str):
+    with _cursor() as cur:
+        cur.execute(
+            '''INSERT INTO globe_territories (territory_id, owner_user_id, owner_name, captured_at)
+               VALUES (%s, %s, %s, %s)
+               ON CONFLICT (territory_id) DO UPDATE SET
+                   owner_user_id = EXCLUDED.owner_user_id,
+                   owner_name    = EXCLUDED.owner_name,
+                   captured_at   = EXCLUDED.captured_at''',
+            (territory_id, user_id, owner_name,
+             datetime.now().strftime('%d.%m.%Y %H:%M'))
+        )
+
+
+def get_globe_top10() -> list:
+    with _cursor() as cur:
+        cur.execute('''
+            SELECT owner_user_id, owner_name, COUNT(*) AS cnt
+            FROM globe_territories
+            WHERE owner_user_id IS NOT NULL
+            GROUP BY owner_user_id, owner_name
+            ORDER BY cnt DESC
+            LIMIT 10
+        ''')
+        return cur.fetchall()
 
 
 def get_leaderboard() -> list:

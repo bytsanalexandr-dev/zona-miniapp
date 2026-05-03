@@ -18,6 +18,7 @@ import game_engine as ge
 import economy
 import gang as gng
 import events as ev
+import globe as gl
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -68,6 +69,9 @@ class BuyBusinessBody(BaseModel):
 
 class RecruitBody(BaseModel):
     member_type: Optional[str] = None
+
+class CaptureTerritoryBody(BaseModel):
+    territory_id: str
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -289,6 +293,92 @@ def get_businesses(user_id: int):
             upg_cost = None
         owned_detail.append({**biz, "daily_income": income, "upgrade_cost": upg_cost})
     return {"owned": owned_detail, "available": available}
+
+
+# ── Globe ─────────────────────────────────────────────────────────────────────
+
+@app.get("/api/globe_data/{user_id}")
+def globe_data(user_id: int):
+    _get_state(user_id)  # ensure player exists
+
+    owned_rows = db.get_globe_territories()
+    ownership  = {row[0]: {'owner_user_id': row[1], 'owner_name': row[2]} for row in owned_rows}
+
+    top10_rows = db.get_globe_top10()
+    player_colors: dict = {}
+    top10 = []
+    for i, (uid, uname, cnt) in enumerate(top10_rows):
+        color = gl.PLAYER_COLORS[i] if i < len(gl.PLAYER_COLORS) else '#aaaaaa'
+        player_colors[uid] = color
+        top10.append({
+            'user_id': uid, 'username': uname,
+            'territory_count': cnt,
+            'globe_percent': round(cnt / gl.TOTAL_TERRITORIES * 100, 1),
+            'color': color,
+        })
+    if user_id not in player_colors:
+        player_colors[user_id] = '#ffffff'
+
+    territories = []
+    for tdef in gl.TERRITORY_DEFS:
+        own = ownership.get(tdef['id'], {})
+        territories.append({**tdef,
+                             'owner_user_id': own.get('owner_user_id'),
+                             'owner_name':    own.get('owner_name')})
+
+    my_count      = sum(1 for t in territories if t['owner_user_id'] == user_id)
+    total_claimed = sum(1 for t in territories if t['owner_user_id'] is not None)
+
+    return {
+        'territories':              territories,
+        'player_colors':            {str(k): v for k, v in player_colors.items()},
+        'top10':                    top10,
+        'current_player_percent':   round(my_count / gl.TOTAL_TERRITORIES * 100, 1),
+        'total_claimed_percent':    round(total_claimed / gl.TOTAL_TERRITORIES * 100, 1),
+        'my_territory_count':       my_count,
+        'total_territories':        gl.TOTAL_TERRITORIES,
+    }
+
+
+@app.post("/api/capture_territory/{user_id}")
+def capture_territory_endpoint(user_id: int, body: CaptureTerritoryBody):
+    state = _get_state(user_id)
+    state['user_id'] = user_id
+
+    tdef = gl.get_territory_def(body.territory_id)
+    if not tdef:
+        raise HTTPException(status_code=404, detail="Территория не найдена")
+
+    if state.get('tier', 1) < tdef['tier_req']:
+        return {'success': False, 'message': f"Нужен тир {tdef['tier_req']}"}
+
+    owned_rows = db.get_globe_territories()
+    ownership  = {row[0]: row[1] for row in owned_rows}
+    current_owner = ownership.get(body.territory_id)
+
+    if current_owner == user_id:
+        return {'success': False, 'message': 'Эта территория уже твоя'}
+
+    cost = tdef['capture_cost'] * (2 if current_owner else 1)
+    if state.get('influence', 0) < cost:
+        n = f'{int(cost):,}'.replace(',', ' ')
+        return {'success': False, 'message': f'Нужно {n} влияния'}
+
+    state['influence'] = state.get('influence', 0) - cost
+    db.save_game(user_id, state)
+    db.capture_globe_territory(body.territory_id, user_id,
+                               state.get('player_name', 'Игрок'))
+
+    # Check world domination
+    my_total = sum(1 for row in db.get_globe_territories() if row[1] == user_id)
+    if my_total >= gl.TOTAL_TERRITORIES:
+        return {'success': True, 'world_domination': True,
+                'message': '🌍 МИРОВОЕ ГОСПОДСТВО! Ты захватил весь мир!',
+                'new_state': state}
+
+    return {'success': True,
+            'message': f'Захвачено: {tdef["name"]}!',
+            'new_state': state}
 
 
 # ── Bot thread ────────────────────────────────────────────────────────────────
