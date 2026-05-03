@@ -86,11 +86,11 @@ body {
 }
 #char-img {
   position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  height: 110%; width: auto;
+  height: 100%; width: auto;
   object-fit: cover; object-position: top center;
+  z-index: 2;
   filter: drop-shadow(0 0 20px rgba(0,0,0,0.8));
   transition: opacity 0.4s;
-  z-index: 2;
 }
 
 .char-info { background: #0d0d1a; padding: 5px 14px 6px; }
@@ -437,10 +437,7 @@ body {
     <div class="scene-stage">
       <div class="scene-overlay"></div>
       <div class="floor-line"></div>
-      <div class="char-scene-wrap">
-        <img id="char-img" src="/static/images/char_tier1.jpg" alt="character">
-        <div class="char-shadow"></div>
-      </div>
+      <img id="char-img" src="/static/images/char_tier1.jpg" alt="character">
       <img id="car-img" src="" alt="car" style="display:none;">
     </div>
     <div class="char-info">
