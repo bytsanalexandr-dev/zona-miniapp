@@ -65,7 +65,7 @@ body {
 .scene-stage {
   position: relative; height: 220px; overflow: hidden;
   display: flex; align-items: flex-end; justify-content: center;
-  background-color: #08080f;
+  background-color: #1a1a2e;
 }
 .scene-overlay {
   position: absolute; inset: 0; pointer-events: none;
@@ -75,28 +75,31 @@ body {
   position: absolute; bottom: 28px; left: 8%; right: 8%;
   height: 1px; background: rgba(255,255,255,0.08);
 }
-.char-scene-wrap { position: relative; z-index: 1; }
+/* char-scene-wrap stretches full stage width so width:100% on img works */
+.char-scene-wrap {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 1;
+}
 .char-scene-wrap::before {
-  content: ''; position: absolute;
-  bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 180px; height: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 70%);
-  pointer-events: none; z-index: -1;
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+  pointer-events: none; z-index: 0;
 }
 /* Car image */
 #car-img {
-  position: absolute; bottom: 0; right: 0; z-index: 2;
+  position: absolute; bottom: 0; right: 0; z-index: 3;
   width: 40%; max-height: 100px;
   object-fit: contain; object-position: bottom right;
   filter: drop-shadow(-4px 4px 10px rgba(0,0,0,0.65));
   transition: opacity 0.5s;
 }
-/* Character image – portrait/bust crop */
+/* Character image – portrait/bust: shows top 40% of full-body image */
 #char-img {
-  height: 220px; width: 160px; display: block;
+  width: 100%; height: 220px; display: block;
   object-fit: cover; object-position: top center;
+  background: #1a1a2e; /* solid fallback for transparent PNG areas */
   filter: drop-shadow(0 0 20px rgba(0,0,0,0.8));
   transition: opacity 0.4s;
+  position: relative; z-index: 2;
 }
 
 .char-info { background: #0d0d1a; padding: 5px 14px 6px; }
@@ -143,7 +146,7 @@ body {
   min-height: 44px;
 }
 .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
-.tab-content { display: none; padding: 12px; }
+.tab-content { display: none; padding: 12px; padding-bottom: 90px; }
 .tab-content.active { display: block; }
 
 /* ── Action buttons ── */
@@ -533,6 +536,15 @@ const STAT_META  = [
   {key:'reputation',label:'Репутация',  color:'#c0392b'},
   {key:'mood',      label:'Настроение', color:'#2980b9'},
 ];
+const ITEM_NAMES = {
+  bread:'Хлеб', tushenka:'Тушняк', sugar:'Сахар', chifir:'Чифирь',
+  vodka:'Водяра', papirosa:'Папироса', prima:'Сигарета', soap:'Мыло',
+  toothpaste:'Зубная паста', razor:'Бритва', tracksuit:'Треники',
+  sneakers:'Кеды', leather_jacket:'Кожанка', shiv:'Заточка',
+  phone:'Телефон', tea_set:'Набор чифиря', bandage:'Бинт',
+  painkillers:'Таблетки',
+};
+
 const ACTION_ICONS = {
   gym:'💪',run:'🏃',pushups:'🤸',talk:'💬',work:'⚒',trade:'💱',brew_chifir:'☕',
   smoke:'🚬',drink:'🍶',gamble:'🃏',wash:'🚿',sleep_extra:'😴',shave:'🪒',
@@ -868,7 +880,7 @@ function renderActions() {
       if (qty <= 0) continue;
       const c = document.createElement('div');
       c.className = 'inv-card';
-      c.innerHTML = `<span class="inv-qty">x${qty}</span><span class="inv-name">${iid}</span>
+      c.innerHTML = `<span class="inv-qty">x${qty}</span><span class="inv-name">${ITEM_NAMES[iid]||iid}</span>
         <button class="inv-use-btn" onclick="useItem('${iid}')">Использовать</button>`;
       igrid.appendChild(c);
     }
