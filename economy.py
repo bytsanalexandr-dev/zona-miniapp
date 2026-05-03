@@ -97,6 +97,22 @@ BUSINESSES = {
         'name': 'Игровые автоматы',    'tier': 2, 'cost': 1500,        'base_income': 250,
         'heat_gen': 1.0,  'desc': 'Нелегальные автоматы.',
         'max_level': 5,   'level_mult': 2.0},
+    't2_autoservice': {
+        'name': 'Автосервис',          'tier': 2, 'cost': 4000,        'base_income': 350,
+        'heat_gen': 0.2,  'desc': 'Ремонт машин и левые запчасти.',
+        'max_level': 5,   'level_mult': 2.0},
+    't2_security_agency': {
+        'name': 'Охранное агентство',  'tier': 2, 'cost': 6000,        'base_income': 500,
+        'heat_gen': 0.3,  'desc': 'Крышуешь районные точки.',
+        'max_level': 5,   'level_mult': 2.0},
+    't2_bar': {
+        'name': 'Пивнушка',            'tier': 2, 'cost': 2500,        'base_income': 220,
+        'heat_gen': 0.4,  'desc': 'Бар с подпольным игорным залом.',
+        'max_level': 5,   'level_mult': 2.0},
+    't2_pawnshop': {
+        'name': 'Ломбард',             'tier': 2, 'cost': 3500,        'base_income': 400,
+        'heat_gen': 0.5,  'desc': 'Скупаешь краденое, продаёшь втридорога.',
+        'max_level': 5,   'level_mult': 2.0},
     # TIER 3
     't3_gas_station': {
         'name': 'Заправка',            'tier': 3, 'cost': 20000,       'base_income': 2000,
@@ -117,6 +133,26 @@ BUSINESSES = {
     't3_loan_shark': {
         'name': 'Ростовщик',           'tier': 3, 'cost': 10000,       'base_income': 3000,
         'heat_gen': 1.5,  'desc': 'Кредиты под дикие проценты.',
+        'max_level': 5,   'level_mult': 2.0},
+    't3_hotel': {
+        'name': 'Гостиница',           'tier': 3, 'cost': 60000,       'base_income': 7000,
+        'heat_gen': 0.1,  'desc': 'Отель для нужных людей.',
+        'max_level': 5,   'level_mult': 2.0},
+    't3_car_dealership': {
+        'name': 'Автосалон',           'tier': 3, 'cost': 80000,       'base_income': 9000,
+        'heat_gen': 0.2,  'desc': 'Торговля авто — легальная и не очень.',
+        'max_level': 5,   'level_mult': 2.0},
+    't3_retail_chain': {
+        'name': 'Торговая сеть',       'tier': 3, 'cost': 120000,      'base_income': 12000,
+        'heat_gen': 0.1,  'desc': 'Сеть магазинов по всему городу.',
+        'max_level': 5,   'level_mult': 2.0},
+    't3_logistics': {
+        'name': 'Логистика',           'tier': 3, 'cost': 35000,       'base_income': 4000,
+        'heat_gen': 0.5,  'desc': 'Перевозки — официальные и не очень.',
+        'max_level': 5,   'level_mult': 2.0},
+    't3_notary': {
+        'name': 'Нотариальная контора','tier': 3, 'cost': 25000,       'base_income': 2500,
+        'heat_gen': -0.5, 'desc': 'Легализация активов. -Жара каждый день.',
         'max_level': 5,   'level_mult': 2.0},
     # TIER 4
     't4_factory': {
@@ -139,6 +175,30 @@ BUSINESSES = {
         'name': 'Агрохолдинг',         'tier': 4, 'cost': 400000,      'base_income': 40000,
         'heat_gen': 0.05, 'desc': 'Земля кормит.',
         'max_level': 5,   'level_mult': 2.0},
+    't4_oil_depot': {
+        'name': 'Нефтебаза',           'tier': 4, 'cost': 700000,      'base_income': 80000,
+        'heat_gen': 0.2,  'desc': 'Перепродажа нефтепродуктов.',
+        'max_level': 5,   'level_mult': 2.0},
+    't4_metallurgy': {
+        'name': 'Металлургический завод','tier': 4,'cost': 2000000,    'base_income': 250000,
+        'heat_gen': 0.1,  'desc': 'Плавим металл, льём деньги.',
+        'max_level': 5,   'level_mult': 2.0},
+    't4_pharma': {
+        'name': 'Фармкомпания',        'tier': 4, 'cost': 1500000,     'base_income': 180000,
+        'heat_gen': 0.3,  'desc': 'Лекарства — и чуть больше.',
+        'max_level': 5,   'level_mult': 2.0},
+    't4_insurance': {
+        'name': 'Страховая компания',  'tier': 4, 'cost': 800000,      'base_income': 90000,
+        'heat_gen': 0.1,  'desc': 'Страховое мошенничество в промышленных масштабах.',
+        'max_level': 5,   'level_mult': 2.0},
+    't4_shipyard': {
+        'name': 'Судостроительный завод','tier': 4,'cost': 3000000,    'base_income': 400000,
+        'heat_gen': 0.1,  'desc': 'Строишь яхты и суда на заказ.',
+        'max_level': 5,   'level_mult': 2.0},
+    't4_it_company': {
+        'name': 'IT-компания',         'tier': 4, 'cost': 600000,      'base_income': 70000,
+        'heat_gen': 0.05, 'desc': 'Разработка, аутсорс, немного хакинга.',
+        'max_level': 5,   'level_mult': 2.0},
     # TIER 5
     't5_state_bank': {
         'name': 'Государственный банк','tier': 5, 'cost': 10000000,    'base_income': 1500000,
@@ -155,6 +215,26 @@ BUSINESSES = {
     't5_media_empire': {
         'name': 'Медиаимперия',        'tier': 5, 'cost': 15000000,    'base_income': 2000000,
         'heat_gen': -3.0, 'desc': 'Полный контроль над нацСМИ.',
+        'max_level': 3,   'level_mult': 2.0},
+    't5_mining': {
+        'name': 'Горнодобывающая компания','tier': 5,'cost': 30000000, 'base_income': 5000000,
+        'heat_gen': 0.2,  'desc': 'Уголь, золото, газ — всё твоё.',
+        'max_level': 3,   'level_mult': 2.0},
+    't5_telecom': {
+        'name': 'Телеком-оператор',    'tier': 5, 'cost': 40000000,    'base_income': 6000000,
+        'heat_gen': 0.1,  'desc': 'Связь на всю страну — плюс прослушка.',
+        'max_level': 3,   'level_mult': 2.0},
+    't5_defense_contractor': {
+        'name': 'Военный подрядчик',   'tier': 5, 'cost': 80000000,    'base_income': 15000000,
+        'heat_gen': 0.5,  'desc': 'Поставки вооружений и оборудования.',
+        'max_level': 3,   'level_mult': 2.0},
+    't5_bank_holding': {
+        'name': 'Банковский холдинг',  'tier': 5, 'cost': 100000000,   'base_income': 20000000,
+        'heat_gen': 0.3,  'desc': 'Контролируешь несколько крупных банков.',
+        'max_level': 3,   'level_mult': 2.0},
+    't5_energy_corp': {
+        'name': 'Энергетическая корпорация','tier': 5,'cost': 60000000,'base_income': 10000000,
+        'heat_gen': 0.2,  'desc': 'Электростанции и газопроводы.',
         'max_level': 3,   'level_mult': 2.0},
     # TIER 6
     't6_offshore_bank': {
@@ -173,6 +253,26 @@ BUSINESSES = {
         'name': 'Личный остров',       'tier': 6, 'cost': 2000000000,  'base_income': 500000000,
         'heat_gen': -10.0,'desc': 'Остров-государство. Своя юрисдикция.',
         'max_level': 1,   'level_mult': 1.0},
+    't6_pmc': {
+        'name': 'Частная военная компания','tier': 6,'cost': 300000000,'base_income': 80000000,
+        'heat_gen': 2.0,  'desc': 'Армия наёмников. Работаем на всех.',
+        'max_level': 3,   'level_mult': 2.0},
+    't6_biopharma': {
+        'name': 'Биофарм-корпорация',  'tier': 6, 'cost': 500000000,  'base_income': 120000000,
+        'heat_gen': 0.5,  'desc': 'Патенты, вакцины, монополия на здоровье.',
+        'max_level': 3,   'level_mult': 2.0},
+    't6_global_logistics': {
+        'name': 'Глобальная логистика','tier': 6, 'cost': 800000000,   'base_income': 180000000,
+        'heat_gen': 0.3,  'desc': 'Перевозишь всё и для всех по всему миру.',
+        'max_level': 3,   'level_mult': 2.0},
+    't6_tech_corp': {
+        'name': 'Технологическая корпорация','tier': 6,'cost': 1500000000,'base_income': 400000000,
+        'heat_gen': 0.2,  'desc': 'ИИ, соцсети, облака — контролируешь цифровой мир.',
+        'max_level': 3,   'level_mult': 2.0},
+    't6_financial_group': {
+        'name': 'Международная финансовая группа','tier': 6,'cost': 3000000000,'base_income': 800000000,
+        'heat_gen': 0.5,  'desc': 'Управляешь мировыми финансовыми потоками.',
+        'max_level': 3,   'level_mult': 2.0},
 }
 
 # Official bribe types
