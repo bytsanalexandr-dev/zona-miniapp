@@ -36,19 +36,12 @@ body {
   --danger:   #c0392b;
 }
 
-/* ── Full-screen background layers (crossfade) ── */
-.bg-layer {
-  position: fixed; inset: 0; z-index: -1;
+/* ── Scene background layers (crossfade, contained in scene-stage) ── */
+.scene-bg-layer {
+  position: absolute; inset: 0;
   background-size: cover; background-position: center center;
-  opacity: 0;
-  transition: opacity 0.9s ease-in-out;
+  opacity: 0; transition: opacity 0.9s ease-in-out;
   pointer-events: none;
-  max-width: 480px; left: 50%; transform: translateX(-50%);
-}
-/* Persistent dark tint under everything */
-body::before {
-  content: ''; position: fixed; inset: 0; z-index: -2;
-  background: #08080f; pointer-events: none;
 }
 
 /* ── Header ── */
@@ -70,9 +63,9 @@ body::before {
 /* ── Scene section ── */
 .scene-section { border-bottom: 1px solid var(--border); }
 .scene-stage {
-  position: relative; height: 140px; overflow: hidden;
+  position: relative; height: 250px; overflow: hidden;
   display: flex; align-items: flex-end; justify-content: center;
-  background: rgba(8,8,15,0.30);
+  background-color: #08080f;
 }
 .scene-overlay {
   position: absolute; inset: 0; pointer-events: none;
@@ -95,20 +88,20 @@ body::before {
 /* Car image */
 #car-img {
   position: absolute; bottom: 0; right: 0; z-index: 2;
-  width: 40%; max-height: 100px;
+  width: 40%; max-height: 130px;
   object-fit: contain; object-position: bottom right;
   filter: drop-shadow(-4px 4px 10px rgba(0,0,0,0.65));
   transition: opacity 0.5s;
 }
 /* Character image */
 #char-img {
-  height: 118px; width: auto; display: block; object-fit: contain;
+  height: 165px; width: auto; display: block; object-fit: contain;
   animation: idle-sway 3.5s ease-in-out infinite;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.75));
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.85));
   transition: opacity 0.4s;
 }
 
-.char-info { background: var(--panel); padding: 10px 14px; }
+.char-info { background: #0d0d1a; padding: 10px 14px; }
 .char-name { font-size: 14px; font-weight: bold; color: var(--text); margin-bottom: 4px; }
 .char-tier {
   font-size: 11px; color: var(--accent);
@@ -124,7 +117,7 @@ body::before {
 .surv-bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
 
 /* ── Stats ── */
-.stats-section { background: var(--panel); padding: 10px 14px; border-bottom: 1px solid var(--border); }
+.stats-section { background: #0d0d1a; padding: 10px 14px; border-bottom: 1px solid var(--border); }
 .stat-row { display: flex; align-items: center; margin-bottom: 5px; gap: 6px; }
 .stat-name { font-size: 10px; color: var(--muted); width: 68px; flex-shrink: 0; text-align: right; }
 .stat-bar-wrap { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; cursor: pointer; }
@@ -417,10 +410,6 @@ body::before {
 </head>
 <body>
 
-<!-- Background layers (crossfade on tier change) -->
-<div id="bg-layer-a" class="bg-layer"></div>
-<div id="bg-layer-b" class="bg-layer"></div>
-
 <!-- Name screen (shown on first launch) -->
 <div id="name-screen" style="display:none;">
   <div class="name-title">З О Н А</div>
@@ -448,6 +437,8 @@ body::before {
   <!-- Scene -->
   <div class="scene-section">
     <div class="scene-stage">
+      <div id="scene-bg-a" class="scene-bg-layer"></div>
+      <div id="scene-bg-b" class="scene-bg-layer"></div>
       <div class="scene-overlay"></div>
       <div class="floor-line"></div>
       <div class="char-scene-wrap">
@@ -621,8 +612,8 @@ function updateBackground(tier) {
   const url  = `/static/images/bg_tier${tier}.jpg`;
   const next = _bgLayer === 'a' ? 'b' : 'a';
   const prev = _bgLayer;
-  const elNext = document.getElementById('bg-layer-' + next);
-  const elPrev = document.getElementById('bg-layer-' + prev);
+  const elNext = document.getElementById('scene-bg-' + next);
+  const elPrev = document.getElementById('scene-bg-' + prev);
   elNext.style.backgroundImage = `url('${url}')`;
   elNext.style.opacity = '1';
   elPrev.style.opacity = '0';
