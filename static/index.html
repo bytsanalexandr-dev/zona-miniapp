@@ -437,7 +437,6 @@ body {
     <div class="scene-stage">
       <div class="scene-overlay"></div>
       <div class="floor-line"></div>
-      <img id="car-img" src="" alt="car" style="display:none;">
     </div>
     <div class="char-info">
       <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;">
@@ -677,15 +676,7 @@ function renderCharacter() {
   const s    = G;
   const tier = s.tier || 1;
 
-  const carImg  = document.getElementById('car-img');
-  const carMap  = { 2: 'car_tier2.jpg', 3: 'car_tier3.jpg', 4: 'car_tier4.jpg' };
-  const carFile = carMap[tier];
-  if (carFile) {
-    carImg.src           = `/static/images/${carFile}`;
-    carImg.style.display = 'block';
-  } else {
-    carImg.style.display = 'none';
-  }
+
 
   const cash = s.cash || 0;
   const cur  = CURRENCY[tier] || 'монет';
