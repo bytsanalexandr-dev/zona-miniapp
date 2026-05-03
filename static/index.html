@@ -786,6 +786,39 @@ const ACTIONS_DEF = {
   train_mind:        {name:'Самообразование',   cat:'Личное',     desc:'+Интеллект'},
   meditate:          {name:'Медитация',         cat:'Личное',     desc:'-Паранойя, +Настроение'},
   lay_low:           {name:'Залечь на дно',     cat:'Личное',     desc:'-Жара', tier:2},
+  // ── Tier 1 новые ──
+  send_malyava:      {name:'Передать маляву',   cat:'Социальное', desc:'+15 реп, стоит 5 монет',        tier:1, cost:5},
+  organize_obshchak: {name:'Организовать общак',cat:'Банда',      desc:'+25 реп, нужно 3 члена банды',  tier:1},
+  // ── Tier 2 новые ──
+  eat_cafe:          {name:'Поесть в кафе',     cat:'Уход',       desc:'+30 голод, +10 настроение',     tier:2, cost:25},
+  go_banya:          {name:'Сходить в баню',    cat:'Уход',       desc:'+40 гигиена, +20 настроение',   tier:2, cost:40},
+  buy_phone_new:     {name:'Новый телефон',     cat:'Социальное', desc:'+20 репутация',                 tier:2, cost:80},
+  find_tochka:       {name:'Найти точку',       cat:'Экономика',  desc:'+50 пассивного дохода/день',    tier:2, cost:100},
+  hire_driver:       {name:'Нанять водителя',   cat:'Банда',      desc:'Рекрутировать водителя',        tier:2, cost:60},
+  // ── Tier 3 новые ──
+  restaurant:        {name:'Ресторан',          cat:'Уход',       desc:'+40 голод, +25 настроение',     tier:3, cost:150},
+  nightclub:         {name:'Ночной клуб',       cat:'Социальное', desc:'+35 настроение, +15 реп',       tier:3, cost:200},
+  sauna_devochki:    {name:'Сауна с девочками', cat:'Уход',       desc:'+50 настроение, +20 здоровье',  tier:3, cost:300},
+  personal_trainer:  {name:'Личный тренер',     cat:'Физическое', desc:'+15 сила',                      tier:3, cost:120},
+  lawyer:            {name:'Адвокат',           cat:'Личное',     desc:'-20 жары',                      tier:3, cost:500},
+  bribe_cop:         {name:'Подкупить мента',   cat:'Личное',     desc:'-15 жары',                      tier:3, cost:300},
+  // ── Tier 4 новые ──
+  business_dinner:   {name:'Деловой ужин',      cat:'Социальное', desc:'+30 реп, +20 влияние',          tier:4, cost:1000},
+  private_doctor:    {name:'Частный доктор',    cat:'Уход',       desc:'+40 здоровье',                  tier:4, cost:800},
+  guard_24_7:        {name:'Охрана 24/7',       cat:'Личное',     desc:'-50% риск травм 7 дней',        tier:4, cost:2000},
+  buy_deputy:        {name:'Купить депутата',   cat:'Империя',    desc:'-30 жары, +100 влияние',        tier:4, cost:10000},
+  yacht_weekend:     {name:'Яхта на выходные',  cat:'Уход',       desc:'+50 настроение, +30 реп',       tier:4, cost:5000},
+  // ── Tier 5 новые ──
+  private_jet:       {name:'Частный самолёт',   cat:'Уход',       desc:'+40 настроение, +50 реп',       tier:5, cost:20000},
+  personal_chef:     {name:'Личный повар',      cat:'Уход',       desc:'+50 голод, +30 настроение',     tier:5, cost:5000},
+  buy_minister:      {name:'Купить министра',   cat:'Империя',    desc:'+200 влияние, -50 жары',        tier:5, cost:50000},
+  spa_resort:        {name:'Спа-курорт',        cat:'Уход',       desc:'+60 здоровье, +40 настроение',  tier:5, cost:15000},
+  press_conference:  {name:'Пресс-конференция', cat:'Социальное', desc:'+100 влияние',                  tier:5, cost:30000},
+  // ── Tier 6 новые ──
+  buy_island:        {name:'Купить остров',     cat:'Империя',    desc:'+500 влияние',                  tier:6, cost:1000000},
+  private_army_op:   {name:'Операция армии',    cat:'Империя',    desc:'+200 влияние',                  tier:6, cost:100000},
+  bribe_un:          {name:'Подкуп ООН',        cat:'Империя',    desc:'-100 жары',                     tier:6, cost:500000},
+  meet_president:    {name:'Встреча с президентом', cat:'Империя',desc:'+300 влияние',                  tier:6, cost:200000},
 };
 
 function renderActions() {
