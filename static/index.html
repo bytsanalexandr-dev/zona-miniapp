@@ -91,75 +91,12 @@ body::before {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-4px); }
 }
-/* CSS character */
-.char-container {
-  width: 90px; height: 160px;
-  position: relative; margin: 0 auto;
+/* Character image */
+#char-img {
+  height: 118px; width: auto; display: block; object-fit: contain;
   animation: idle-sway 3.5s ease-in-out infinite;
-}
-.char-body {
-  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-  width: 44px; height: 70px;
-  background: var(--char-body-color, #3a4f6e);
-  border-radius: 8px 8px 4px 4px;
-  transition: width 0.5s, background 0.5s;
-}
-.char-head {
-  position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);
-  width: 38px; height: 38px;
-  background: var(--char-skin-color, #e8c49a);
-  border-radius: 50%;
-  transition: background 0.5s;
-}
-.char-hair {
-  position: absolute; bottom: 132px; left: 50%; transform: translateX(-50%);
-  width: 40px; height: 12px;
-  background: var(--char-hair-color, #4a3728);
-  border-radius: 20px 20px 0 0;
-  transition: opacity 0.5s;
-}
-.char-beard {
-  position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);
-  width: 28px; height: 14px;
-  background: var(--char-hair-color, #4a3728);
-  border-radius: 0 0 12px 12px; top: 130px;
-  opacity: 0; transition: opacity 0.5s;
-}
-.char-eye-left, .char-eye-right {
-  position: absolute; width: 7px; height: 7px;
-  background: #222; border-radius: 50%; bottom: 118px;
-}
-.char-eye-left  { left: calc(50% - 12px); }
-.char-eye-right { left: calc(50% + 5px); }
-.char-mouth {
-  position: absolute; width: 16px; height: 3px;
-  background: #a06050; border-radius: 3px; bottom: 107px;
-  left: 50%; transform: translateX(-50%);
-}
-.char-arm-left, .char-arm-right {
-  position: absolute; width: 12px; height: 55px;
-  background: var(--char-body-color, #3a4f6e);
-  border-radius: 6px; bottom: 35px;
-}
-.char-arm-left  { left: calc(50% - 30px); }
-.char-arm-right { left: calc(50% + 18px); }
-.char-leg-left, .char-leg-right {
-  position: absolute; width: 16px; height: 32px;
-  background: #2a2a3e; border-radius: 4px; bottom: 0;
-}
-.char-leg-left  { left: calc(50% - 16px); }
-.char-leg-right { left: calc(50% + 0px); }
-.char-bruise {
-  position: absolute; width: 14px; height: 10px;
-  background: rgba(180,60,60,0.6); border-radius: 50%;
-  bottom: 115px; left: calc(50% + 6px);
-  opacity: 0; transition: opacity 0.3s;
-}
-.char-tattoo {
-  position: absolute; bottom: 55px; left: calc(50% + 18px);
-  width: 10px; height: 20px;
-  border: 2px solid rgba(100,150,255,0.5); border-radius: 3px;
-  opacity: 0; transition: opacity 0.5s;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.75));
+  transition: opacity 0.4s;
 }
 
 .char-info { background: var(--panel); padding: 10px 14px; }
@@ -505,21 +442,7 @@ body::before {
       <div class="scene-overlay"></div>
       <div class="floor-line"></div>
       <div class="char-scene-wrap">
-        <div class="char-container" id="char-container">
-          <div class="char-leg-right"></div>
-          <div class="char-leg-left"></div>
-          <div class="char-arm-left" id="char-arm-left"></div>
-          <div class="char-arm-right" id="char-arm-right"></div>
-          <div class="char-body" id="char-body"></div>
-          <div class="char-head" id="char-head"></div>
-          <div class="char-hair" id="char-hair"></div>
-          <div class="char-beard" id="char-beard"></div>
-          <div class="char-eye-left"></div>
-          <div class="char-eye-right"></div>
-          <div class="char-mouth"></div>
-          <div class="char-bruise" id="char-bruise"></div>
-          <div class="char-tattoo" id="char-tattoo"></div>
-        </div>
+        <img id="char-img" src="/static/images/char_tier1.jpg" alt="character">
         <div class="char-shadow"></div>
       </div>
     </div>
@@ -758,48 +681,21 @@ function getRank() {
 
 // ── Character ─────────────────────────────────────────────────────────────────
 function renderCharacter() {
-  const s = G;
-  const tier  = s.tier || 1;
-  const rep   = s.reputation || 0;
-  const days  = s.days_survived || 0;
-  const w     = s.weight || 70;
-  const hyg   = s.hygiene || 50;
-  const inj   = s.injuries || [];
+  const s    = G;
+  const tier = s.tier || 1;
 
-  const skinColors = ['#e8c49a','#d4a870','#c8956c','#b07040','#8b5a30'];
-  const skinIdx    = Math.min(skinColors.length - 1, (s.skin_type || 1) - 1);
-  document.documentElement.style.setProperty('--char-skin-color', skinColors[skinIdx]);
+  document.getElementById('char-img').src = `/static/images/char_tier${tier}.jpg`;
 
-  const bodyWidth = Math.max(40, Math.min(60, 40 + (w - 60) * 0.5));
-  document.getElementById('char-body').style.width = bodyWidth + 'px';
-
-  // Clothing color by hygiene and tier
-  let bodyColor = tier >= 2 ? '#3d5a8a' : (hyg > 50 ? '#3a4f6e' : '#4a3030');
-  document.documentElement.style.setProperty('--char-body-color', bodyColor);
-  document.getElementById('char-arm-left').style.background  = bodyColor;
-  document.getElementById('char-arm-right').style.background = bodyColor;
-
-  // Beard after 7 days
-  document.getElementById('char-beard').style.opacity = days >= 7 ? '1' : '0';
-
-  // Tattoo at rep 50+
-  document.getElementById('char-tattoo').style.opacity = rep >= 50 ? '1' : '0';
-
-  // Bruise if injuries
-  const hasBruise = inj.some(i => ['bruise','black_eye','bloody_nose'].includes(i.type));
-  document.getElementById('char-bruise').style.opacity = hasBruise ? '1' : '0';
-
-  // Char info panel
   const cash = s.cash || 0;
   const cur  = CURRENCY[tier] || 'монет';
-  document.getElementById('char-name').textContent  = s.player_name || '—';
-  document.getElementById('char-tier').textContent  = TIER_NAMES[tier] || 'ЗОНА';
+  document.getElementById('char-name').textContent    = s.player_name || '—';
+  document.getElementById('char-tier').textContent    = TIER_NAMES[tier] || 'ЗОНА';
   document.getElementById('cash-display').textContent = '💰 ' + fmt(Math.floor(cash)) + ' ' + cur;
   document.getElementById('actions-left').textContent = `Действий: ${s.actions_left || 0}/3`;
 
-  const surv = calcSurv(s);
+  const surv    = calcSurv(s);
   const survBar = document.getElementById('surv-bar');
-  survBar.style.width = surv + '%';
+  survBar.style.width      = surv + '%';
   survBar.style.background = surv >= 60 ? 'var(--green)' : surv >= 35 ? 'var(--gold)' : 'var(--accent)';
 }
 
