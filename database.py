@@ -4,6 +4,7 @@ import psycopg2
 import psycopg2.pool
 from contextlib import contextmanager
 from datetime import datetime
+from typing import Optional
 
 # Direct connection uses IPv6-only (blocked on many networks).
 # Use the Supabase IPv4 connection pooler (eu-west-1, port 6543) as default.
@@ -13,7 +14,7 @@ _POOLER_URL = (
 )
 DATABASE_URL = os.environ.get("DATABASE_URL", _POOLER_URL)
 
-_pool: psycopg2.pool.SimpleConnectionPool | None = None
+_pool: Optional[psycopg2.pool.SimpleConnectionPool] = None
 
 
 def _get_pool() -> psycopg2.pool.SimpleConnectionPool:
@@ -107,7 +108,7 @@ def save_game(user_id: int, state: dict):
         )
 
 
-def load_game(user_id: int) -> dict | None:
+def load_game(user_id: int) -> Optional[dict]:
     with _cursor() as cur:
         cur.execute('SELECT data FROM user_games WHERE user_id = %s', (user_id,))
         row = cur.fetchone()
