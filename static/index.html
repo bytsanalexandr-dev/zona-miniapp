@@ -10,19 +10,20 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; font-family: 'Courier New', Courier, monospace; }
 body {
-  background: var(--bg);
+  background: #08080f;
   color: var(--text);
   max-width: 480px;
   margin: 0 auto;
   overflow-x: hidden;
   padding-bottom: 80px;
+  position: relative;
 }
 
 /* ── Telegram theme vars with fallbacks ── */
 :root {
   --bg:       #0d0d1a;
-  --panel:    #141428;
-  --card:     #1a1a36;
+  --panel:    rgba(18, 18, 38, 0.88);
+  --card:     rgba(22, 22, 46, 0.92);
   --border:   #2a2a50;
   --accent:   #e94560;
   --gold:     #d4a017;
@@ -30,8 +31,23 @@ body {
   --blue:     #2980b9;
   --text:     #e8e8f0;
   --muted:    #888899;
-  --btn:      #252545;
+  --btn:      rgba(30, 30, 60, 0.95);
   --danger:   #c0392b;
+}
+
+/* ── Full-screen background layers (crossfade) ── */
+.bg-layer {
+  position: fixed; inset: 0; z-index: -1;
+  background-size: cover; background-position: center center;
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+  pointer-events: none;
+  max-width: 480px; left: 50%; transform: translateX(-50%);
+}
+/* Persistent dark tint under everything */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -2;
+  background: #08080f; pointer-events: none;
 }
 
 /* ── Header ── */
@@ -50,18 +66,36 @@ body {
   border-radius: 10px; padding: 2px 8px;
 }
 
-/* ── Character section ── */
-.character-section {
-  background: var(--panel);
-  padding: 16px;
-  display: flex; gap: 16px; align-items: flex-start;
-  border-bottom: 1px solid var(--border);
+/* ── Scene section ── */
+.scene-section { border-bottom: 1px solid var(--border); }
+.scene-stage {
+  position: relative; height: 140px; overflow: hidden;
+  display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(8,8,15,0.30);
 }
-.char-wrap { position: relative; flex-shrink: 0; }
+.scene-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(8,8,15,0.1) 0%, rgba(8,8,15,0.6) 100%);
+}
+.floor-line {
+  position: absolute; bottom: 28px; left: 8%; right: 8%;
+  height: 1px; background: rgba(255,255,255,0.08);
+}
+.char-scene-wrap { position: relative; z-index: 1; padding-bottom: 6px; }
+.char-shadow {
+  position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+  width: 56px; height: 8px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%);
+}
+@keyframes idle-sway {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-4px); }
+}
 /* CSS character */
 .char-container {
   width: 90px; height: 160px;
   position: relative; margin: 0 auto;
+  animation: idle-sway 3.5s ease-in-out infinite;
 }
 .char-body {
   position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -128,7 +162,7 @@ body {
   opacity: 0; transition: opacity 0.5s;
 }
 
-.char-info { flex: 1; min-width: 0; }
+.char-info { background: var(--panel); padding: 10px 14px; }
 .char-name { font-size: 14px; font-weight: bold; color: var(--text); margin-bottom: 4px; }
 .char-tier {
   font-size: 11px; color: var(--accent);
@@ -437,6 +471,10 @@ body {
 </head>
 <body>
 
+<!-- Background layers (crossfade on tier change) -->
+<div id="bg-layer-a" class="bg-layer"></div>
+<div id="bg-layer-b" class="bg-layer"></div>
+
 <!-- Name screen (shown on first launch) -->
 <div id="name-screen" style="display:none;">
   <div class="name-title">З О Н А</div>
@@ -461,30 +499,39 @@ body {
     <div id="hdr-rank" class="header-rank">—</div>
   </div>
 
-  <!-- Character -->
-  <div class="character-section">
-    <div class="char-wrap">
-      <div class="char-container" id="char-container">
-        <div class="char-leg-right"></div>
-        <div class="char-leg-left"></div>
-        <div class="char-arm-left" id="char-arm-left"></div>
-        <div class="char-arm-right" id="char-arm-right"></div>
-        <div class="char-body" id="char-body"></div>
-        <div class="char-head" id="char-head"></div>
-        <div class="char-hair" id="char-hair"></div>
-        <div class="char-beard" id="char-beard"></div>
-        <div class="char-eye-left"></div>
-        <div class="char-eye-right"></div>
-        <div class="char-mouth"></div>
-        <div class="char-bruise" id="char-bruise"></div>
-        <div class="char-tattoo" id="char-tattoo"></div>
+  <!-- Scene -->
+  <div class="scene-section">
+    <div class="scene-stage">
+      <div class="scene-overlay"></div>
+      <div class="floor-line"></div>
+      <div class="char-scene-wrap">
+        <div class="char-container" id="char-container">
+          <div class="char-leg-right"></div>
+          <div class="char-leg-left"></div>
+          <div class="char-arm-left" id="char-arm-left"></div>
+          <div class="char-arm-right" id="char-arm-right"></div>
+          <div class="char-body" id="char-body"></div>
+          <div class="char-head" id="char-head"></div>
+          <div class="char-hair" id="char-hair"></div>
+          <div class="char-beard" id="char-beard"></div>
+          <div class="char-eye-left"></div>
+          <div class="char-eye-right"></div>
+          <div class="char-mouth"></div>
+          <div class="char-bruise" id="char-bruise"></div>
+          <div class="char-tattoo" id="char-tattoo"></div>
+        </div>
+        <div class="char-shadow"></div>
       </div>
     </div>
     <div class="char-info">
-      <div class="char-name" id="char-name">—</div>
-      <div class="char-tier" id="char-tier">ЗОНА</div>
-      <div class="cash-display" id="cash-display">💰 0</div>
-      <div class="actions-left" id="actions-left">Действий: 3/3</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;">
+        <div class="char-name" id="char-name">—</div>
+        <div class="char-tier" id="char-tier">ЗОНА</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+        <div class="cash-display" id="cash-display">💰 0</div>
+        <div class="actions-left" id="actions-left">Действий: 3/3</div>
+      </div>
       <div class="surv-label">Шанс выжить</div>
       <div class="surv-bar-wrap">
         <div class="surv-bar-fill" id="surv-bar" style="width:50%; background: var(--green);"></div>
@@ -544,6 +591,8 @@ let G = null;          // full game state
 let USER_ID = null;    // telegram user id
 let ACTIVE_TAB = 'actions';
 let API_BASE = '';     // same origin
+let _bgLayer = 'a';   // which layer is currently visible
+let _bgTier  = 0;     // tier currently shown (0 = none)
 
 const TIER_NAMES = {1:'ЗОНА',2:'РАЙОН',3:'ГОРОД',4:'ОБЛАСТЬ',5:'СТРАНА',6:'МИР'};
 const CURRENCY   = {1:'монет',2:'нал',3:'безнал',4:'активы',5:'офшоры',6:'крипта'};
@@ -632,9 +681,25 @@ document.getElementById('name-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') createGame();
 });
 
+// ── Background crossfade ──────────────────────────────────────────────────────
+function updateBackground(tier) {
+  if (tier === _bgTier) return;
+  _bgTier = tier;
+  const url  = `/static/images/bg_tier${tier}.jpg`;
+  const next = _bgLayer === 'a' ? 'b' : 'a';
+  const prev = _bgLayer;
+  const elNext = document.getElementById('bg-layer-' + next);
+  const elPrev = document.getElementById('bg-layer-' + prev);
+  elNext.style.backgroundImage = `url('${url}')`;
+  elNext.style.opacity = '1';
+  elPrev.style.opacity = '0';
+  _bgLayer = next;
+}
+
 // ── Render all ────────────────────────────────────────────────────────────────
 function renderAll() {
   if (!G) return;
+  updateBackground(G.tier || 1);
   renderHeader();
   renderCharacter();
   renderStats();
