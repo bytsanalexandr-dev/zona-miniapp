@@ -91,6 +91,14 @@ body::before {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-4px); }
 }
+/* Car image */
+#car-img {
+  position: absolute; bottom: 0; right: 0; z-index: 2;
+  width: 40%; max-height: 100px;
+  object-fit: contain; object-position: bottom right;
+  filter: drop-shadow(-4px 4px 10px rgba(0,0,0,0.65));
+  transition: opacity 0.5s;
+}
 /* Character image */
 #char-img {
   height: 118px; width: auto; display: block; object-fit: contain;
@@ -445,6 +453,7 @@ body::before {
         <img id="char-img" src="/static/images/char_tier1.jpg" alt="character">
         <div class="char-shadow"></div>
       </div>
+      <img id="car-img" src="" alt="car" style="display:none;">
     </div>
     <div class="char-info">
       <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;">
@@ -685,6 +694,16 @@ function renderCharacter() {
   const tier = s.tier || 1;
 
   document.getElementById('char-img').src = `/static/images/char_tier${tier}.jpg`;
+
+  const carImg  = document.getElementById('car-img');
+  const carMap  = { 2: 'car_tier2.jpg', 3: 'car_tier3.jpg', 4: 'car_tier4.jpg' };
+  const carFile = carMap[tier];
+  if (carFile) {
+    carImg.src           = `/static/images/${carFile}`;
+    carImg.style.display = 'block';
+  } else {
+    carImg.style.display = 'none';
+  }
 
   const cash = s.cash || 0;
   const cur  = CURRENCY[tier] || 'монет';
