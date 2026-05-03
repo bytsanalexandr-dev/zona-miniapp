@@ -27,8 +27,11 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    db.init_db()
-    logger.info("DB initialised")
+    try:
+        db.init_db()
+        logger.info("DB initialised")
+    except Exception as e:
+        logger.error(f"DB init failed (will retry on first request): {e}")
     _start_bot_thread()
     yield
 
