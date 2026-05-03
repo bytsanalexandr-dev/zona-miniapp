@@ -9,8 +9,9 @@
 /* ── Reset & base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; font-family: 'Courier New', Courier, monospace; }
+html { background: #08080f; } /* dark base on html so z-index:-1 bg-layers are visible */
 body {
-  background: #08080f;
+  background: transparent;
   color: var(--text);
   max-width: 480px;
   margin: 0 auto;
@@ -21,7 +22,7 @@ body {
 
 /* ── Telegram theme vars with fallbacks ── */
 :root {
-  --bg:       #0d0d1a;
+  --bg:       #08080f;
   --panel:    rgba(18, 18, 38, 0.88);
   --card:     rgba(22, 22, 46, 0.92);
   --border:   #2a2a50;
